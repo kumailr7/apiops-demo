@@ -1,0 +1,50 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: ngrok-apiops-demo-ingress
+  namespace: ngrok-apiops-demo
+spec:
+  gatewayClassName: ngrok
+  listeners:
+    - name: ngrok-apiops-demo-listener
+      #highlight-start
+      hostname: "NGROK_DOMAIN"
+      #highlight-end
+      port: 80
+      protocol: HTTPS
+      tls:
+        mode: Terminate
+        certificateRefs:
+          - name: ngrokcert #ngrok will generate the cert so this cert does not be defined and will be ignored if defined
+      allowedRoutes:
+        kinds:
+          - kind: HTTPRoute
+        namespaces:
+          from: Selector
+          selector:
+            matchLabels:
+              expose-apps: "true"
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: ngrok-apiops-demo-route
+  namespace: ngrok-apiops-demo
+spec:
+  parentRefs:
+    - kind: Gateway
+      name: ngrok-apiops-demo-gateway
+      namespace: ngrok-apiops-demo
+  hostnames:
+    #highlight-start
+    - "NGROK_DOMAIN"
+    #highlight-end
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      backendRefs:
+        - name: ngrok-apiops-demo
+          kind: Service
+          port: 5000

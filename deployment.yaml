@@ -34,23 +34,3 @@ spec:
         ports:
           - name: http
             containerPort: 5000
----
-# ngrok Kubernetes Operator configuration
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: ngrok-apiops-demo-ingress
-  namespace: ngrok-apiops-demo
-spec:
-  ingressClassName: ngrok
-  rules:
-    - host: ngrok-apiops-demo.ngrok.app
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: ngrok-apiops-demo
-                port:
-                  number: 80
