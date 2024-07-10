@@ -2,6 +2,7 @@ apiVersion: gateway.networking.k8s.io/v1
 kind: GatewayClass
 metadata:
   name: ngrok
+  namespace: ngrok-apiops-demo
 spec:
   controllerName: ngrok.com/gateway-controller
 ---
@@ -14,7 +15,7 @@ spec:
   gatewayClassName: ngrok
   listeners:
     - name: ngrok-apiops-demo-listener
-      hostname: "ngrok-apiops-demo.ngrok.app"
+      hostname: ngrok-apiops-demo.ngrok.app
       port: 80
       protocol: HTTPS
       tls:
@@ -39,7 +40,7 @@ spec:
   parentRefs:
     - name: ngrok-apiops-demo-gateway
   hostnames:
-    - "ngrok-apiops-demo.ngrok.app"
+    - ngrok-apiops-demo.ngrok.app
   rules:
     - matches:
         - path:
