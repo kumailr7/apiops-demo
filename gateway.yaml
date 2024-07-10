@@ -46,5 +46,5 @@ spec:
             type: PathPrefix
             value: /
       backendRefs:
-        - name: ngrok-apiops-demo
-          port: 5000
+        - name: ngrok-apiops-demo-service
+          port: 80

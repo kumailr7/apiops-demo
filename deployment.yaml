@@ -1,32 +1,17 @@
-apiVersion: v1
-kind: Service
-metadata:
-  name: ngrok-apiops-demo
-  namespace: ngrok-apiops-demo
-spec:
-  ports:
-    - name: http
-      port: 80
-      targetPort: 5000
-  selector:
-    app: ngrok-apiops-demo
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ngrok-apiops-demo
+  name: ngrok-apiops-demo-deployment
   namespace: ngrok-apiops-demo
-  labels:
-    app: ngrok-apiops-demo
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: ngrok-apiops-demo
+      app: ngrok-apiops-demo-app
   template:
     metadata:
       labels:
-        app: ngrok-apiops-demo
+        app: ngrok-apiops-demo-app
     spec:
       containers:
       - name: ngrok-apiops-demo
@@ -34,3 +19,18 @@ spec:
         ports:
           - name: http
             containerPort: 5000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ngrok-apiops-demo-service
+  namespace: ngrok-apiops-demo
+  labels:
+    app: ngrok-apiops-demo-app
+spec:
+  ports:
+    - name: http
+      port: 80
+      targetPort: 5000
+  selector:
+    app: ngrok-apiops-demo-app
