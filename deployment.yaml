@@ -1,36 +1,36 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: legends-api
-  namespace: legends-api
+  name: ngrok-apiops-demo
+  namespace: ngrok-apiops-demo
 spec:
   ports:
     - name: http
       port: 80
       targetPort: 5000
   selector:
-    app: legends-api
+    app: ngrok-apiops-demo
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: legends-api
-  namespace: legends-api
+  name: ngrok-apiops-demo
+  namespace: ngrok-apiops-demo
   labels:
-    app: legends-api
+    app: ngrok-apiops-demo
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: legends-api
+      app: ngrok-apiops-demo
   template:
     metadata:
       labels:
-        app: legends-api
+        app: ngrok-apiops-demo
     spec:
       containers:
-      - name: legends-api
-        image: joelhans/legends-api
+      - name: ngrok-apiops-demo
+        image: joelhans/ngrok-apiops-demo
         ports:
           - name: http
             containerPort: 5000
@@ -39,18 +39,18 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: legends-api-ingress
-  namespace: legends-api
+  name: ngrok-apiops-demo-ingress
+  namespace: ngrok-apiops-demo
 spec:
   ingressClassName: ngrok
   rules:
-    - host: legends-api.ngrok.app
+    - host: ngrok-apiops-demo.ngrok.app
       http:
         paths:
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: legends-api
+                name: ngrok-apiops-demo
                 port:
                   number: 80
