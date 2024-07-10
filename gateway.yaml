@@ -47,5 +47,4 @@ spec:
             value: /
       backendRefs:
         - name: ngrok-apiops-demo
-          kind: Deployment
           port: 5000
