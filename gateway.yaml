@@ -13,7 +13,7 @@ spec:
       tls:
         mode: Terminate
         certificateRefs:
-          - name: ngrokcert #ngrok will generate the cert so this cert does not be defined and will be ignored if defined
+          - name: ngrokcert
       allowedRoutes:
         kinds:
           - kind: HTTPRoute
@@ -31,7 +31,7 @@ metadata:
 spec:
   parentRefs:
     - kind: Gateway
-      name: ngrok-apiops-demo-gateway
+      name: ngrok-apiops-demo-ingress
       namespace: ngrok-apiops-demo
   hostnames:
     - "ngrok-apiops-demo.ngrok.app"
