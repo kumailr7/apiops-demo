@@ -7,9 +7,7 @@ spec:
   gatewayClassName: ngrok
   listeners:
     - name: ngrok-apiops-demo-listener
-      #highlight-start
-      hostname: "NGROK_DOMAIN"
-      #highlight-end
+      hostname: "ngrok-apiops-demo.ngrok.app"
       port: 80
       protocol: HTTPS
       tls:
@@ -36,9 +34,7 @@ spec:
       name: ngrok-apiops-demo-gateway
       namespace: ngrok-apiops-demo
   hostnames:
-    #highlight-start
-    - "NGROK_DOMAIN"
-    #highlight-end
+    - "ngrok-apiops-demo.ngrok.app"
   rules:
     - matches:
         - path:
