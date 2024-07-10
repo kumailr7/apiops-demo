@@ -49,3 +49,4 @@ spec:
       backendRefs:
         - name: ngrok-apiops-demo-service
           port: 443
+          kind: Service
