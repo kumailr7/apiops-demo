@@ -40,6 +40,12 @@ spec:
         - path:
             type: PathPrefix
             value: /
+      filters:
+        - type: ExtensionRef
+          extensionRef:
+            group: ngrok.k8s.ngrok.com
+            kind: NgrokTrafficPolicy
+            name: traffic-policy-example
       backendRefs:
         - name: ngrok-apiops-demo-service
           port: 80
