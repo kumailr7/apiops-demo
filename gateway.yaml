@@ -1,4 +1,12 @@
 apiVersion: gateway.networking.k8s.io/v1
+kind: GatewayClass
+metadata:
+  name: ngrok-apiops-demo-gatewayclass
+  namespace: ngrok-apiops-demo
+spec:
+  controllerName: ngrok.com/gateway-controller
+---
+apiVersion: gateway.networking.k8s.io/v1
 kind: Gateway
 metadata:
   name: ngrok-apiops-demo-gateway
@@ -7,21 +15,13 @@ spec:
   gatewayClassName: ngrok
   listeners:
     - name: ngrok-apiops-demo-listener
-      hostname: ngrok-apiops-demo.ngrok.app
+      hostname: "ngrok-apiops-demo.ngrok.app"
       port: 443
       protocol: HTTPS
       tls:
         mode: Terminate
         certificateRefs:
           - name: ngrokcert
-      allowedRoutes:
-        kinds:
-          - kind: HTTPRoute
-        namespaces:
-          from: Selector
-          selector:
-            matchLabels:
-              expose-apps: "true"
 ---
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
@@ -34,7 +34,7 @@ spec:
       name: ngrok-apiops-demo-gateway
       namespace: ngrok-apiops-demo
   hostnames:
-    - ngrok-apiops-demo.ngrok.app
+    - "ngrok-apiops-demo.ngrok.app"
   rules:
     - matches:
         - path:
