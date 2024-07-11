@@ -46,6 +46,11 @@ spec:
             group: ngrok.k8s.ngrok.com
             kind: NgrokTrafficPolicy
             name: traffic-policy-example
+        - type: ExtensionRef
+          extensionRef:
+            group: ngrok.k8s.ngrok.com
+            kind: NgrokTrafficPolicy
+            name: traffic-policy-rate-limiting
       backendRefs:
         - name: ngrok-apiops-demo-service
           port: 80
