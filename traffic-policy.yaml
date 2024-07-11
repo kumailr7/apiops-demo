@@ -1,0 +1,18 @@
+kind: NgrokTrafficPolicy
+apiVersion: ngrok.k8s.ngrok.com/v1alpha1
+metadata:
+  name: traffic-policy-example
+spec:
+  policy:
+    inbound:
+      - name: "greetings"
+        expressions:
+          - "req.method == 'GET'"
+          - "req.path.startsWith('/greetings')"
+        actions:
+          - type: "custom_response"
+            config:
+              status_code: 200
+              content: Hello
+              headers:
+                content-type: text/plain
