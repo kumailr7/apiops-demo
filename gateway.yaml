@@ -51,7 +51,25 @@ spec:
             group: ngrok.k8s.ngrok.com
             kind: NgrokTrafficPolicy
             name: traffic-policy-rate-limiting
+        - type: ExtensionRef
+          extensionRef:
+            group: ngrok.k8s.ngrok.com
+            kind: NgrokTrafficPolicy
+            name: traffic-policy-test
       backendRefs:
         - name: ngrok-apiops-demo-service
           port: 80
           kind: Service
+---
+kind: NgrokTrafficPolicy
+apiVersion: ngrok.k8s.ngrok.com/v1alpha1
+metadata:
+  name: traffic-policy-test
+spec:
+  policy:
+    inbound:
+      - name: "deny_patch"
+        expressions:
+          - "req.method == 'PATCH'"
+        actions:
+          - type: "deny"
