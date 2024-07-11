@@ -19,7 +19,7 @@ metadata:
   name: ngrok-apiops-demo-deployment
   namespace: ngrok-apiops-demo
 spec:
-  replicas: 3
+  replicas: 5
   selector:
     matchLabels:
       app: ngrok-apiops-demo-app
