@@ -7,8 +7,8 @@ RUN go mod download
 
 COPY *.go ./
 
-RUN CGO_ENABLED=0 GOOS=linux go build -o /legends-api
+RUN CGO_ENABLED=0 GOOS=linux go build -o /ngrok-apiops-demo
 
 EXPOSE 5000
 
-CMD ["/legends-api"]
+CMD ["/ngrok-apiops-demo"]
