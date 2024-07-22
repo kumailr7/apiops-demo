@@ -1,4 +1,4 @@
-module ngrok-go-api-gateway
+module apiops-demo
 
 go 1.21.9
 
