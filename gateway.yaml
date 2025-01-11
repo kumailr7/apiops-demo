@@ -15,7 +15,7 @@ spec:
   gatewayClassName: ngrok
   listeners:
     - name: ngrok-apiops-demo-listener
-      hostname: "ngrok-apiops-demo.ngrok.app"
+      hostname: "whole-fit-shrew.ngrok-free.app"
       port: 443
       protocol: HTTPS
       tls:
@@ -34,7 +34,7 @@ spec:
       name: ngrok-apiops-demo-gateway
       namespace: ngrok-apiops-demo
   hostnames:
-    - "ngrok-apiops-demo.ngrok.app"
+    - "whole-fit-shrew.ngrok-free.app"
   rules:
     - matches:
         - path:
